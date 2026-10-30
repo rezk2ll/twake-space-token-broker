@@ -120,7 +120,7 @@ async def running(
     cozy_stack: FakeCozyStack | None = None,
     space: FakeSpace | None = None,
 ) -> AsyncIterator[AsyncClient]:
-    """The broker, from its start to its stop."""
+    """The broker, from its start to its stop, for a browser that prefers French."""
     app = create_app(
         settings,
         lemonldap_transport=lemonldap.transport,
@@ -130,7 +130,11 @@ async def running(
     )
     async with (
         LifespanManager(app) as manager,
-        AsyncClient(transport=ASGITransport(app=manager.app), base_url=PUBLIC_BASE_URL) as client,
+        AsyncClient(
+            transport=ASGITransport(app=manager.app),
+            base_url=PUBLIC_BASE_URL,
+            headers={"Accept-Language": "fr"},
+        ) as client,
     ):
         yield client
 

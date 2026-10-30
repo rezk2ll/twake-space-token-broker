@@ -1,0 +1,74 @@
+{
+  "quote": "“{}”",
+  "language_label": "Ngôn ngữ",
+  "retry": "Bắt đầu lại",
+  "close": "Bạn có thể đóng trang này.",
+  "refused": "Việc cấp quyền không thành công",
+  "authorized": "Trợ lý của bạn đã được cấp quyền",
+  "authorized_but_drive": "Trợ lý của bạn đã được cấp quyền, trừ trong Drive",
+  "other_account": "Liên kết này dành cho tài khoản khác",
+  "other_account_text": "Liên kết này cấp quyền cho trợ lý của {owner}, nhưng trình duyệt này đang đăng nhập Twake bằng {signed_in}: chưa có gì được lưu. Hãy mở liên kết này trong cửa sổ riêng tư, rồi đăng nhập bằng {owner}.",
+  "space_title": "Trợ lý của bạn trong các không gian",
+  "space_intro": "Để trợ lý đọc các không gian Twake Space và bảng tin của chúng, cũng như quản lý thành viên, hãy tạo một token API cho trợ lý trong Twake Space, rồi dán vào đây.",
+  "space_kept": "Một token đã được lưu, dán vào ngày {day}. {allows}",
+  "space_kept_choice": "Giữ, gỡ bỏ hoặc thay thế token: hãy tạo một token API khác trong Twake Space, rồi dán vào đây.",
+  "steps_open": ["Mở trang ", "Token API", " của Twake Space, rồi nhấn “Tạo token”."],
+  "steps": [
+    "Tên: “Trợ lý”.",
+    "Quyền hạn: Không gian “Ghi”, Luồng hoạt động “Đọc”, Thành viên “Ghi”, Token API “Không có quyền”.",
+    "Không gian truy cập được: “Tất cả không gian”, tức là “Tất cả không gian của tôi, kể cả không gian tham gia sau này”.",
+    "Hết hạn sau: “90 ngày”.",
+    "Sao chép token (Twake Space chỉ hiển thị một lần), rồi dán vào bên dưới."
+  ],
+  "scopes_needed": "Trợ lý cần “Đọc không gian” và “Đọc bảng tin”. Không có “Sửa không gian”, trợ lý không tạo hay đổi tên không gian nào; không có “Quản lý thành viên”, trợ lý không thêm hay xóa ai.",
+  "token": "Token",
+  "save": "Lưu token",
+  "skip": "Bỏ qua bước này",
+  "replace": "Thay token",
+  "keep": "Giữ token này",
+  "remove": "Gỡ bỏ token này",
+  "may_act": {
+    "granted": "Trợ lý Twake Space của bạn giờ có thể hành động thay {user}, kể cả trong Drive.",
+    "absent": "Trợ lý Twake Space của bạn giờ có thể hành động thay {user}. Drive không khả dụng cho tài khoản của bạn.",
+    "unchanged": "Trợ lý Twake Space của bạn vẫn có thể hành động thay {user}. Quyền truy cập Drive của trợ lý không thay đổi.",
+    "without": "Trợ lý Twake Space của bạn giờ có thể hành động thay {user}, nhưng không trong Drive. {reason}"
+  },
+  "without_drive": {
+    "declined": "Bạn chưa cấp quyền truy cập tệp của mình.",
+    "refused": "Phiên bản Drive của bạn đã từ chối mã cấp quyền.",
+    "unavailable": "Phiên bản Drive của bạn không thể hoàn tất việc cấp quyền."
+  },
+  "space_after": {
+    "skipped": "Không có token API, trợ lý không hành động trong các không gian Twake Space của bạn.",
+    "kept": "Trong các không gian Twake Space của bạn, trợ lý giữ token API bạn đã dán trước đó.",
+    "pasted": "Trong các không gian Twake Space của bạn, trợ lý hành động bằng token bạn vừa dán.",
+    "removed": "Trợ lý không còn hành động trong các không gian Twake Space của bạn: token API bạn đã dán đã được gỡ bỏ. Hãy thu hồi nó trên trang “Token API” của Twake Space."
+  },
+  "allows_none": "Token này không cho phép: {lacking}.",
+  "allows_all": "Token này cho phép: {held}.",
+  "allows_some": "Token này cho phép: {held}. Nó không cho phép: {lacking}.",
+  "scopes": {
+    "space:read": "Đọc không gian",
+    "feed:read": "Đọc bảng tin",
+    "members:write": "Quản lý thành viên",
+    "space:write": "Sửa không gian"
+  },
+  "reasons": {
+    "none_in_progress": "Không có việc cấp quyền nào đang diễn ra trong trình duyệt này.",
+    "expired": "Việc cấp quyền đã hết hạn.",
+    "not_in_progress": "Trang này không khớp với việc cấp quyền đang diễn ra.",
+    "no_longer_in_progress": "Việc cấp quyền này không còn diễn ra.",
+    "lemonldap_declined": "LemonLDAP đã không cấp quyền.",
+    "lemonldap_refused": "LemonLDAP đã từ chối mã cấp quyền.",
+    "lemonldap_unavailable": "LemonLDAP không thể hoàn tất việc cấp quyền.",
+    "offline_access_denied": "LemonLDAP đã không cấp cho trợ lý quyền truy cập ngoại tuyến."
+  },
+  "problems": {
+    "not_a_token": "Token này chưa được lưu: đây không phải token API của Twake Space (bắt đầu bằng tws_).",
+    "refused": "Token này chưa được lưu: Twake Space không nhận ra nó. Hãy sao chép toàn bộ, hoặc tạo token khác nếu nó đã bị thu hồi hay hết hạn.",
+    "too_broad": "Token này chưa được lưu: nó cho phép “Quản lý token”, nên nếu bị lộ, nó có thể tạo thêm token khác. Hãy tạo token khác, với Token API “Không có quyền”.",
+    "scopes_missing": "Token này chưa được lưu: cần ít nhất “Đọc không gian” và “Đọc bảng tin”. {allows}",
+    "not_theirs": "Token này chưa được lưu: đây là token tổ chức hoặc của tài khoản khác: trong ít nhất một không gian mà nó truy cập, nó không hành động thay bạn. Hãy tạo token của riêng bạn trong Twake Space, khi đăng nhập bằng {user}.",
+    "unavailable": "Token này chưa được lưu: Twake Space không thể kiểm tra nó. Hãy thử lại sau giây lát."
+  }
+}

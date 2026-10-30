@@ -1,0 +1,74 @@
+{
+  "quote": "„{}“",
+  "language_label": "Sprache",
+  "retry": "Neu beginnen",
+  "close": "Sie können diese Seite schließen.",
+  "refused": "Die Autorisierung ist fehlgeschlagen",
+  "authorized": "Ihr Assistent ist autorisiert",
+  "authorized_but_drive": "Ihr Assistent ist autorisiert, außer in Drive",
+  "other_account": "Dieser Link ist für ein anderes Konto",
+  "other_account_text": "Dieser Link autorisiert den Assistenten von {owner}, aber dieser Browser ist bei Twake als {signed_in} angemeldet: Es wurde nichts gespeichert. Öffnen Sie diesen Link in einem privaten Fenster und melden Sie sich dann als {owner} an.",
+  "space_title": "Ihr Assistent in Ihren Spaces",
+  "space_intro": "Damit er Ihre Spaces in Twake Space und deren Feeds lesen und ihre Mitglieder verwalten kann, erstellen Sie in Twake Space ein API-Token für ihn und fügen Sie es hier ein.",
+  "space_kept": "Ein Token ist bereits gespeichert, eingefügt am {day}. {allows}",
+  "space_kept_choice": "Behalten Sie es, entfernen Sie es oder ersetzen Sie es: Erstellen Sie ein weiteres API-Token in Twake Space und fügen Sie es hier ein.",
+  "steps_open": ["Öffnen Sie in Twake Space die Seite ", "API-Tokens", " und klicken Sie auf „Token erstellen“."],
+  "steps": [
+    "Name: „Assistent“.",
+    "Was es darf: Spaces „Schreiben“, Aktivitätsfeed „Lesen“, Mitglieder „Schreiben“, API-Tokens „Kein Zugriff“.",
+    "Erreichbare Spaces: „Alle Spaces“, also „Alle meine Spaces, auch spätere“.",
+    "Läuft ab in: „90 Tagen“.",
+    "Kopieren Sie das Token, das Twake Space nur einmal anzeigt, und fügen Sie es unten ein."
+  ],
+  "scopes_needed": "Er braucht „Spaces lesen“ und „Feeds lesen“. Ohne „Spaces ändern“ erstellt er keine Spaces und benennt keine um; ohne „Mitglieder verwalten“ fügt er niemanden hinzu und entfernt niemanden.",
+  "token": "Token",
+  "save": "Token speichern",
+  "skip": "Diesen Schritt überspringen",
+  "replace": "Token ersetzen",
+  "keep": "Dieses Token behalten",
+  "remove": "Dieses Token entfernen",
+  "may_act": {
+    "granted": "Ihr Assistent von Twake Space kann jetzt für {user} handeln, auch in Drive.",
+    "absent": "Ihr Assistent von Twake Space kann jetzt für {user} handeln. Drive ist für Ihr Konto nicht verfügbar.",
+    "unchanged": "Ihr Assistent von Twake Space kann weiterhin für {user} handeln. Sein Zugriff auf Drive ändert sich nicht.",
+    "without": "Ihr Assistent von Twake Space kann jetzt für {user} handeln, aber nicht in Drive. {reason}"
+  },
+  "without_drive": {
+    "declined": "Sie haben den Zugriff auf Ihre Dateien nicht erlaubt.",
+    "refused": "Ihre Drive-Instanz hat den Autorisierungscode abgelehnt.",
+    "unavailable": "Ihre Drive-Instanz konnte die Autorisierung nicht abschließen."
+  },
+  "space_after": {
+    "skipped": "Ohne API-Token handelt er nicht in Ihren Spaces von Twake Space.",
+    "kept": "In Ihren Spaces von Twake Space behält er das API-Token, das Sie eingefügt hatten.",
+    "pasted": "In Ihren Spaces von Twake Space handelt er mit dem Token, das Sie eingefügt haben.",
+    "removed": "Er handelt nicht mehr in Ihren Spaces von Twake Space: Das API-Token, das Sie eingefügt hatten, ist entfernt. Widerrufen Sie es auch auf der Seite „API-Tokens“ von Twake Space."
+  },
+  "allows_none": "Dieses Token erlaubt nicht: {lacking}.",
+  "allows_all": "Dieses Token erlaubt: {held}.",
+  "allows_some": "Dieses Token erlaubt: {held}. Es erlaubt nicht: {lacking}.",
+  "scopes": {
+    "space:read": "Spaces lesen",
+    "feed:read": "Feeds lesen",
+    "members:write": "Mitglieder verwalten",
+    "space:write": "Spaces ändern"
+  },
+  "reasons": {
+    "none_in_progress": "In diesem Browser läuft keine Autorisierung.",
+    "expired": "Die Autorisierung ist abgelaufen.",
+    "not_in_progress": "Diese Seite gehört nicht zur laufenden Autorisierung.",
+    "no_longer_in_progress": "Diese Autorisierung läuft nicht mehr.",
+    "lemonldap_declined": "LemonLDAP hat die Autorisierung nicht erteilt.",
+    "lemonldap_refused": "LemonLDAP hat den Autorisierungscode abgelehnt.",
+    "lemonldap_unavailable": "LemonLDAP konnte die Autorisierung nicht abschließen.",
+    "offline_access_denied": "LemonLDAP hat dem Assistenten keinen Offline-Zugriff gewährt."
+  },
+  "problems": {
+    "not_a_token": "Dieses Token wurde nicht gespeichert: Es ist kein API-Token von Twake Space, das mit tws_ beginnt.",
+    "refused": "Dieses Token wurde nicht gespeichert: Twake Space erkennt es nicht. Kopieren Sie es vollständig, oder erstellen Sie ein neues, falls es widerrufen wurde oder abgelaufen ist.",
+    "too_broad": "Dieses Token wurde nicht gespeichert: Es erlaubt „Tokens verwalten“ und könnte, wenn es in falsche Hände gerät, weitere erstellen. Erstellen Sie ein neues mit API-Tokens „Kein Zugriff“.",
+    "scopes_missing": "Dieses Token wurde nicht gespeichert: Es braucht mindestens „Spaces lesen“ und „Feeds lesen“. {allows}",
+    "not_theirs": "Dieses Token wurde nicht gespeichert: Es ist ein Organisationstoken oder das eines anderen Kontos: In mindestens einem der Spaces, die es erreicht, handelt es nicht in Ihrem Namen. Erstellen Sie Ihr eigenes in Twake Space, angemeldet als {user}.",
+    "unavailable": "Dieses Token wurde nicht gespeichert: Twake Space konnte es nicht prüfen. Versuchen Sie es gleich noch einmal."
+  }
+}

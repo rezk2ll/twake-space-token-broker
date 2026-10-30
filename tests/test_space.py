@@ -168,7 +168,7 @@ async def test_the_agent_of_an_owner_who_pasted_a_space_token_gets_it_with_lemon
     assert "<title>Votre assistant est autorisé - Twake Space</title>" in pasted.text
     assert (
         f"{PASTED} Ce jeton permet : « Lire les espaces », « Lire les fils », « Gérer les"
-        " membres », « Modifier les espaces »."
+        " membres » et « Modifier les espaces »."
     ) in text_of(pasted)
     response = await space_route(client, MMAUDET)
     assert response.status_code == 200
@@ -198,8 +198,8 @@ async def test_a_space_token_without_the_scopes_the_agent_can_do_without_is_kept
 
     assert pasted.status_code == 200
     assert (
-        "Ce jeton permet : « Lire les espaces », « Lire les fils »."
-        " Il ne permet pas : « Gérer les membres », « Modifier les espaces »."
+        "Ce jeton permet : « Lire les espaces » et « Lire les fils »."
+        " Il ne permet pas : « Gérer les membres » et « Modifier les espaces »."
     ) in text_of(pasted)
     assert (await space_route(client, MMAUDET)).headers["x-twake-space-token"] == token
 
@@ -239,18 +239,18 @@ async def test_an_owner_who_skipped_the_space_step_gets_the_consent_link_for_spa
     [
         (
             ("feed:read", "members:write", "space:write"),
-            "Ce jeton permet : « Lire les fils », « Gérer les membres », « Modifier les espaces »."
-            " Il ne permet pas : « Lire les espaces ».",
+            "Ce jeton permet : « Lire les fils », « Gérer les membres » et « Modifier les"
+            " espaces ». Il ne permet pas : « Lire les espaces ».",
         ),
         (
             ("space:read", "members:write", "space:write"),
-            "Ce jeton permet : « Lire les espaces », « Gérer les membres », « Modifier les"
+            "Ce jeton permet : « Lire les espaces », « Gérer les membres » et « Modifier les"
             " espaces ». Il ne permet pas : « Lire les fils ».",
         ),
         (
             ("notifications:write",),
             "Ce jeton ne permet pas : « Lire les espaces », « Lire les fils », « Gérer les"
-            " membres », « Modifier les espaces ».",
+            " membres » et « Modifier les espaces ».",
         ),
     ],
     ids=["without space:read", "without feed:read", "with none of them"],
@@ -763,7 +763,7 @@ async def test_keeping_the_space_token_changes_nothing(
     assert (await space_route(client, MMAUDET)).headers["x-twake-space-token"] == token
     assert (
         "Un jeton est déjà enregistré, collé le 21 septembre 2026. Ce jeton permet : « Lire les"
-        " espaces », « Lire les fils »."
+        " espaces » et « Lire les fils »."
     ) in text_of(await space_link(client, lemonldap, MMAUDET))
 
 
@@ -946,7 +946,7 @@ async def test_without_twake_space_the_consent_has_no_space_step(
     ("pasted_at", "day"),
     [
         (datetime(2026, 9, 21, 14, 13, tzinfo=UTC), "21 septembre 2026"),
-        (datetime(2026, 10, 1, 9, 30, tzinfo=UTC), "1er octobre 2026"),
+        (datetime(2026, 10, 1, 9, 30, tzinfo=UTC), "1 octobre 2026"),
     ],
     ids=["any day", "the first of a month"],
 )
@@ -967,8 +967,9 @@ async def test_a_space_token_is_kept_encrypted_with_its_scopes_and_when_it_was_p
     step = await space_link(client, lemonldap, MMAUDET)
 
     assert (
-        f"Un jeton est déjà enregistré, collé le {day}. Ce jeton permet : « Lire les espaces »,"
-        " « Lire les fils ». Il ne permet pas : « Gérer les membres », « Modifier les espaces »."
+        f"Un jeton est déjà enregistré, collé le {day}. Ce jeton permet : « Lire les espaces »"
+        " et « Lire les fils ». Il ne permet pas : « Gérer les membres » et « Modifier les"
+        " espaces »."
     ) in text_of(step)
     for button in ("Remplacer le jeton", "Garder ce jeton", "Retirer ce jeton"):
         assert f">{button}</button>" in step.text

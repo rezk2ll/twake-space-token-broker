@@ -1,0 +1,74 @@
+{
+  "quote": "« {} »",
+  "language_label": "Langue",
+  "retry": "Recommencer",
+  "close": "Vous pouvez fermer cette page.",
+  "refused": "L'autorisation n'a pas abouti",
+  "authorized": "Votre assistant est autorisé",
+  "authorized_but_drive": "Votre assistant est autorisé, sauf dans Drive",
+  "other_account": "Ce lien est pour un autre compte",
+  "other_account_text": "Ce lien autorise l'assistant de {owner}, mais ce navigateur est connecté à Twake en tant que {signed_in} : rien n'a été enregistré. Ouvrez ce lien dans une fenêtre de navigation privée, puis connectez-vous en tant que {owner}.",
+  "space_title": "Votre assistant dans vos espaces",
+  "space_intro": "Pour qu'il lise vos espaces Twake Space et leurs fils, et qu'il en gère les membres, créez-lui un jeton d'API dans Twake Space, puis collez-le ici.",
+  "space_kept": "Un jeton est déjà enregistré, collé le {day}. {allows}",
+  "space_kept_choice": "Gardez-le, retirez-le, ou remplacez-le : créez un autre jeton d'API dans Twake Space, puis collez-le ici.",
+  "steps_open": ["Ouvrez la page ", "Jetons d'API", " de Twake Space, puis cliquez sur « Créer un jeton »."],
+  "steps": [
+    "Nom : « Assistant ».",
+    "Ce qu'il peut faire : Espaces « Écriture », Fil d'activité « Lecture », Membres « Écriture », Jetons d'API « Aucun accès ».",
+    "Espaces accessibles : « Tous les espaces », soit « Tous mes espaces, y compris ceux que je rejoindrai ».",
+    "Expire dans : « 90 jours ».",
+    "Copiez le jeton, que Twake Space n'affiche qu'une fois, puis collez-le ci-dessous."
+  ],
+  "scopes_needed": "« Lire les espaces » et « Lire les fils » lui sont indispensables. Sans « Modifier les espaces », il ne crée ni ne renomme d'espace ; sans « Gérer les membres », il n'ajoute ni ne retire personne.",
+  "token": "Jeton",
+  "save": "Enregistrer le jeton",
+  "skip": "Passer cette étape",
+  "replace": "Remplacer le jeton",
+  "keep": "Garder ce jeton",
+  "remove": "Retirer ce jeton",
+  "may_act": {
+    "granted": "Votre assistant Twake Space peut désormais agir pour {user}, y compris dans Drive.",
+    "absent": "Votre assistant Twake Space peut désormais agir pour {user}. Drive n'est pas disponible pour votre compte.",
+    "unchanged": "Votre assistant Twake Space peut toujours agir pour {user}. Son accès à Drive ne change pas.",
+    "without": "Votre assistant Twake Space peut désormais agir pour {user}, mais pas dans Drive. {reason}"
+  },
+  "without_drive": {
+    "declined": "Vous n'avez pas accordé l'accès à vos fichiers.",
+    "refused": "Votre instance Drive a refusé le code d'autorisation.",
+    "unavailable": "Votre instance Drive n'a pas pu terminer l'autorisation."
+  },
+  "space_after": {
+    "skipped": "Sans jeton d'API, il n'agit pas dans vos espaces Twake Space.",
+    "kept": "Dans vos espaces Twake Space, il garde le jeton d'API que vous aviez collé.",
+    "pasted": "Dans vos espaces Twake Space, il agit avec le jeton que vous avez collé.",
+    "removed": "Il n'agit plus dans vos espaces Twake Space : le jeton d'API que vous aviez collé est retiré. Révoquez-le aussi sur la page « Jetons d'API » de Twake Space."
+  },
+  "allows_none": "Ce jeton ne permet pas : {lacking}.",
+  "allows_all": "Ce jeton permet : {held}.",
+  "allows_some": "Ce jeton permet : {held}. Il ne permet pas : {lacking}.",
+  "scopes": {
+    "space:read": "Lire les espaces",
+    "feed:read": "Lire les fils",
+    "members:write": "Gérer les membres",
+    "space:write": "Modifier les espaces"
+  },
+  "reasons": {
+    "none_in_progress": "Aucune autorisation n'est en cours dans ce navigateur.",
+    "expired": "L'autorisation a expiré.",
+    "not_in_progress": "Cette page ne correspond pas à l'autorisation en cours.",
+    "no_longer_in_progress": "Cette autorisation n'est plus en cours.",
+    "lemonldap_declined": "LemonLDAP n'a pas accordé l'autorisation.",
+    "lemonldap_refused": "LemonLDAP a refusé le code d'autorisation.",
+    "lemonldap_unavailable": "LemonLDAP n'a pas pu terminer l'autorisation.",
+    "offline_access_denied": "LemonLDAP n'a pas accordé d'accès hors ligne à l'assistant."
+  },
+  "problems": {
+    "not_a_token": "Ce jeton n'a pas été enregistré : ce n'est pas un jeton d'API de Twake Space, qui commence par tws_.",
+    "refused": "Ce jeton n'a pas été enregistré : Twake Space ne le reconnaît pas. Copiez-le en entier, ou créez-en un autre s'il a été révoqué ou s'il a expiré.",
+    "too_broad": "Ce jeton n'a pas été enregistré : il permet « Gérer les jetons » : s'il fuyait, il servirait à en créer d'autres. Créez-en un autre, avec Jetons d'API « Aucun accès ».",
+    "scopes_missing": "Ce jeton n'a pas été enregistré : il faut au moins « Lire les espaces » et « Lire les fils ». {allows}",
+    "not_theirs": "Ce jeton n'a pas été enregistré : c'est un jeton d'organisation ou celui d'un autre compte : dans au moins un des espaces qu'il atteint, il n'agit pas en votre nom. Créez le vôtre dans Twake Space, connecté en tant que {user}.",
+    "unavailable": "Ce jeton n'a pas été enregistré : Twake Space n'a pas pu le vérifier. Réessayez dans un moment."
+  }
+}

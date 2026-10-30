@@ -1,0 +1,74 @@
+{
+  "quote": "«{}»",
+  "language_label": "Lingua",
+  "retry": "Ricomincia",
+  "close": "Puoi chiudere questa pagina.",
+  "refused": "L'autorizzazione non è andata a buon fine",
+  "authorized": "Il tuo assistente è autorizzato",
+  "authorized_but_drive": "Il tuo assistente è autorizzato, tranne in Drive",
+  "other_account": "Questo link è per un altro account",
+  "other_account_text": "Questo link autorizza l'assistente di {owner}, ma questo browser ha effettuato l'accesso a Twake come {signed_in}: non è stato salvato nulla. Apri questo link in una finestra privata, poi accedi come {owner}.",
+  "space_title": "Il tuo assistente nei tuoi spazi",
+  "space_intro": "Perché legga i tuoi spazi Twake Space e i loro feed, e ne gestisca i membri, crea per lui un token API in Twake Space, poi incollalo qui.",
+  "space_kept": "Un token è già salvato, incollato il {day}. {allows}",
+  "space_kept_choice": "Tienilo, rimuovilo o sostituiscilo: crea un altro token API in Twake Space, poi incollalo qui.",
+  "steps_open": ["Apri la pagina ", "Token API", " di Twake Space, poi fai clic su «Crea un token»."],
+  "steps": [
+    "Nome: «Assistente».",
+    "Cosa può fare: Spazi «Scrittura», Feed delle attività «Lettura», Membri «Scrittura», Token API «Nessun accesso».",
+    "Spazi raggiungibili: «Tutti gli spazi», cioè «Tutti i miei spazi, anche quelli futuri».",
+    "Scade tra: «90 giorni».",
+    "Copia il token, che Twake Space mostra una sola volta, poi incollalo qui sotto."
+  ],
+  "scopes_needed": "Gli servono «Leggere gli spazi» e «Leggere i feed». Senza «Modificare gli spazi» non crea né rinomina spazi; senza «Gestire i membri» non aggiunge né rimuove nessuno.",
+  "token": "Token",
+  "save": "Salva il token",
+  "skip": "Salta questo passaggio",
+  "replace": "Sostituisci il token",
+  "keep": "Tieni questo token",
+  "remove": "Rimuovi questo token",
+  "may_act": {
+    "granted": "Il tuo assistente Twake Space ora può agire per {user}, anche in Drive.",
+    "absent": "Il tuo assistente Twake Space ora può agire per {user}. Drive non è disponibile per il tuo account.",
+    "unchanged": "Il tuo assistente Twake Space può ancora agire per {user}. Il suo accesso a Drive non cambia.",
+    "without": "Il tuo assistente Twake Space ora può agire per {user}, ma non in Drive. {reason}"
+  },
+  "without_drive": {
+    "declined": "Non hai concesso l'accesso ai tuoi file.",
+    "refused": "La tua istanza Drive ha rifiutato il codice di autorizzazione.",
+    "unavailable": "La tua istanza Drive non è riuscita a completare l'autorizzazione."
+  },
+  "space_after": {
+    "skipped": "Senza token API, non agisce nei tuoi spazi Twake Space.",
+    "kept": "Nei tuoi spazi Twake Space, mantiene il token API che avevi incollato.",
+    "pasted": "Nei tuoi spazi Twake Space, agisce con il token che hai incollato.",
+    "removed": "Non agisce più nei tuoi spazi Twake Space: il token API che avevi incollato è stato rimosso. Revocalo anche nella pagina «Token API» di Twake Space."
+  },
+  "allows_none": "Questo token non consente: {lacking}.",
+  "allows_all": "Questo token consente: {held}.",
+  "allows_some": "Questo token consente: {held}. Non consente: {lacking}.",
+  "scopes": {
+    "space:read": "Leggere gli spazi",
+    "feed:read": "Leggere i feed",
+    "members:write": "Gestire i membri",
+    "space:write": "Modificare gli spazi"
+  },
+  "reasons": {
+    "none_in_progress": "Nessuna autorizzazione è in corso in questo browser.",
+    "expired": "L'autorizzazione è scaduta.",
+    "not_in_progress": "Questa pagina non corrisponde all'autorizzazione in corso.",
+    "no_longer_in_progress": "Questa autorizzazione non è più in corso.",
+    "lemonldap_declined": "LemonLDAP non ha concesso l'autorizzazione.",
+    "lemonldap_refused": "LemonLDAP ha rifiutato il codice di autorizzazione.",
+    "lemonldap_unavailable": "LemonLDAP non è riuscito a completare l'autorizzazione.",
+    "offline_access_denied": "LemonLDAP non ha concesso all'assistente l'accesso offline."
+  },
+  "problems": {
+    "not_a_token": "Questo token non è stato salvato: non è un token API di Twake Space, che inizia con tws_.",
+    "refused": "Questo token non è stato salvato: Twake Space non lo riconosce. Copialo per intero, oppure creane un altro se è stato revocato o è scaduto.",
+    "too_broad": "Questo token non è stato salvato: consente «Gestire i token», quindi se venisse divulgato potrebbe crearne altri. Creane un altro, con Token API «Nessun accesso».",
+    "scopes_missing": "Questo token non è stato salvato: servono almeno «Leggere gli spazi» e «Leggere i feed». {allows}",
+    "not_theirs": "Questo token non è stato salvato: è un token di organizzazione o di un altro account: in almeno uno degli spazi che raggiunge, non agisce a tuo nome. Crea il tuo in Twake Space, con l'accesso come {user}.",
+    "unavailable": "Questo token non è stato salvato: Twake Space non è riuscito a verificarlo. Riprova tra un momento."
+  }
+}

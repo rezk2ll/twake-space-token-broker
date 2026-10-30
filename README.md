@@ -15,9 +15,11 @@ Twake Space takes the API tokens its users create. The consent ends on a step wh
 | `GET /consent?owner=<email>` | the consent link bound to its owner, as the problems below give it: a redirect to LemonLDAP |
 | `GET /consent?owner=<email>&app=space` | the owner's link for their Space token, as `space_token_missing` gives it: a redirect to LemonLDAP, then straight to the Space step |
 | `GET /consent` | the plain consent link, the same for every user: a redirect to LemonLDAP |
-| `GET /callback` | where LemonLDAP, then the user's Drive instance, send the user back: a short page in French |
-| `POST /consent/space` | where the Space step posts the token the user pasted, or skips it: a short page in French |
+| `GET /callback` | where LemonLDAP, then the user's Drive instance, send the user back: a short page |
+| `POST /consent/space` | where the Space step posts the token the user pasted, or skips it: a short page |
+| `GET /consent/page?lang=<language>` | the page the broker showed last, in the language its language menu asks for |
 
+- The pages are in English, French, German, Spanish, Italian, Russian and Vietnamese, one file each in `locales/`, English the source: the language a link asks for with `lang`, kept a year in a cookie, else the one the browser prefers, else English.
 - The consent signs the user in with the `twake-space-agents` client: an authorization code with PKCE (S256) and the scope `openid email offline_access`. The state and the PKCE verifier wait in a signed, HttpOnly cookie. The consent lasts 10 minutes, but the browser keeps the cookie an hour, so that an expired consent still starts over from the owner's link.
 - A browser holds one consent at a time: opening a consent link again while one is in progress replaces it, and the first one then ends on a page saying it no longer matches the consent in progress.
 - The callback checks the state, then exchanges the code with `client_secret_basic`. It stores the refresh token under the user's email, which is the `sub` of the ID token on Twake's LemonLDAP.
@@ -152,7 +154,7 @@ The image `ghcr.io/linagora/twake-space-token-broker` listens on 8080 as user 10
 To deploy it:
 
 - register `<PUBLIC_BASE_URL>/callback` as a redirect of the LemonLDAP client;
-- publish only `/consent`, `/callback` and `/consent/space` on the public host, and let only APISIX reach `/forward-auth` and `/delegation`;
+- publish only `/consent`, `/callback`, `/consent/page` and `/consent/space` on the public host, and let only APISIX reach `/forward-auth` and `/delegation`;
 - for Drive, set `DRIVE_INSTANCE_DOMAIN`, have LemonLDAP release `workplaceFqdn` in the client's userinfo, and let the broker reach the users' Drive instances over HTTPS;
 - for Twake Space, set `SPACE_URL` and `SPACE_WEB_URL`, and let the broker reach Space's API;
 - run a single replica, since the access tokens and the refresh lock are kept in memory.

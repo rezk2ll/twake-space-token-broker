@@ -1,0 +1,74 @@
+{
+  "quote": "“{}”",
+  "language_label": "Language",
+  "retry": "Start over",
+  "close": "You can close this page.",
+  "refused": "The authorization did not go through",
+  "authorized": "Your assistant is authorized",
+  "authorized_but_drive": "Your assistant is authorized, except in Drive",
+  "other_account": "This link is for another account",
+  "other_account_text": "This link authorizes the assistant of {owner}, but this browser is signed in to Twake as {signed_in}: nothing was saved. Open this link in a private window, then sign in as {owner}.",
+  "space_title": "Your assistant in your spaces",
+  "space_intro": "For it to read your Twake Space spaces and their feeds, and manage their members, create an API token for it in Twake Space, then paste it here.",
+  "space_kept": "A token is already saved, pasted on {day}. {allows}",
+  "space_kept_choice": "Keep it, remove it, or replace it: create another API token in Twake Space, then paste it here.",
+  "steps_open": ["Open the ", "API tokens", " page of Twake Space, then click “Create a token”."],
+  "steps": [
+    "Name: “Assistant”.",
+    "What it can do: Spaces “Write”, Activity feed “Read”, Members “Write”, API tokens “No access”.",
+    "Spaces it reaches: “All spaces”, that is “All my spaces, including the ones I join later”.",
+    "Expires in: “90 days”.",
+    "Copy the token, which Twake Space shows only once, then paste it below."
+  ],
+  "scopes_needed": "It needs “Read spaces” and “Read feeds”. Without “Change spaces”, it creates and renames no space; without “Manage members”, it adds and removes no one.",
+  "token": "Token",
+  "save": "Save the token",
+  "skip": "Skip this step",
+  "replace": "Replace the token",
+  "keep": "Keep this token",
+  "remove": "Remove this token",
+  "may_act": {
+    "granted": "Your Twake Space assistant can now act for {user}, Drive included.",
+    "absent": "Your Twake Space assistant can now act for {user}. Drive is not available for your account.",
+    "unchanged": "Your Twake Space assistant can still act for {user}. Its access to Drive does not change.",
+    "without": "Your Twake Space assistant can now act for {user}, but not in Drive. {reason}"
+  },
+  "without_drive": {
+    "declined": "You did not grant access to your files.",
+    "refused": "Your Drive instance refused the authorization code.",
+    "unavailable": "Your Drive instance could not complete the authorization."
+  },
+  "space_after": {
+    "skipped": "Without an API token, it does not act in your Twake Space spaces.",
+    "kept": "In your Twake Space spaces, it keeps the API token you had pasted.",
+    "pasted": "In your Twake Space spaces, it acts with the token you pasted.",
+    "removed": "It no longer acts in your Twake Space spaces: the API token you had pasted is removed. Revoke it too on the “API tokens” page of Twake Space."
+  },
+  "allows_none": "This token does not allow: {lacking}.",
+  "allows_all": "This token allows: {held}.",
+  "allows_some": "This token allows: {held}. It does not allow: {lacking}.",
+  "scopes": {
+    "space:read": "Read spaces",
+    "feed:read": "Read feeds",
+    "members:write": "Manage members",
+    "space:write": "Change spaces"
+  },
+  "reasons": {
+    "none_in_progress": "No authorization is in progress in this browser.",
+    "expired": "The authorization expired.",
+    "not_in_progress": "This page does not match the authorization in progress.",
+    "no_longer_in_progress": "This authorization is no longer in progress.",
+    "lemonldap_declined": "LemonLDAP did not grant the authorization.",
+    "lemonldap_refused": "LemonLDAP refused the authorization code.",
+    "lemonldap_unavailable": "LemonLDAP could not complete the authorization.",
+    "offline_access_denied": "LemonLDAP did not grant the assistant offline access."
+  },
+  "problems": {
+    "not_a_token": "This token was not saved: it is not a Twake Space API token, which starts with tws_.",
+    "refused": "This token was not saved: Twake Space does not recognize it. Copy all of it, or create another one if it was revoked or has expired.",
+    "too_broad": "This token was not saved: it allows “Manage tokens”, so if it leaked it could create others. Create another one, with API tokens “No access”.",
+    "scopes_missing": "This token was not saved: it needs at least “Read spaces” and “Read feeds”. {allows}",
+    "not_theirs": "This token was not saved: it is an organization token or another account's: in at least one of the spaces it reaches, it does not act as you. Create your own in Twake Space, signed in as {user}.",
+    "unavailable": "This token was not saved: Twake Space could not check it. Try again in a moment."
+  }
+}

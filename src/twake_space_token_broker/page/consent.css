@@ -39,6 +39,50 @@ body {
   fill: currentColor;
 }
 
+.languages {
+  position: relative;
+}
+
+.languages summary {
+  padding: 4px 12px;
+  border: 1px solid var(--twake-palette-border-main);
+  border-radius: 100px;
+  color: var(--twake-palette-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.languages summary:hover {
+  color: var(--twake-palette-text-primary);
+}
+
+.languages ul {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  min-width: 160px;
+  list-style: none;
+  background: var(--twake-palette-background-paper);
+}
+
+.languages a {
+  display: block;
+  padding: 6px 16px;
+  color: var(--twake-palette-text-primary);
+}
+
+.languages a:hover {
+  background: var(--twake-palette-action-hover);
+  color: var(--twake-palette-text-primary);
+  text-decoration: none;
+}
+
+.languages a[aria-current] {
+  background: var(--twake-palette-action-selected);
+  font-weight: 500;
+}
+
 main {
   background: var(--twake-palette-background-paper);
   border-radius: var(--twake-shape-borderRadius);
