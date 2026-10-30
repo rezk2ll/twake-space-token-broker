@@ -1,0 +1,233 @@
+:root {
+  color-scheme: light dark;
+  --tint: 12%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tint: 24%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--twake-palette-background-default);
+  color: var(--twake-palette-text-primary);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.15px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--twake-palette-primary-main);
+  outline-offset: 2px;
+}
+
+.page {
+  max-width: 560px;
+}
+
+.brand svg {
+  height: 28px;
+  width: auto;
+  fill: currentColor;
+}
+
+main {
+  background: var(--twake-palette-background-paper);
+  border-radius: var(--twake-shape-borderRadius);
+}
+
+@media (min-width: 900px) {
+  .page-wide {
+    max-width: 1080px;
+  }
+
+  main.page-wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: min-content;
+    column-gap: 32px;
+  }
+
+  main.page-wide > * {
+    grid-column: 1;
+  }
+
+  main > .how {
+    grid-column: 2;
+    grid-row: 1 / span 99;
+  }
+}
+
+.status {
+  width: 48px;
+  height: 48px;
+  color: var(--tone);
+  background: color-mix(in srgb, var(--tone) var(--tint), transparent);
+}
+
+.status svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.status-success {
+  --tone: var(--twake-palette-success-main);
+}
+
+.status-warning {
+  --tone: var(--twake-palette-warning-main);
+}
+
+.status-error {
+  --tone: var(--twake-palette-error-main);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.167;
+  letter-spacing: normal;
+}
+
+main > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.steps {
+  background: var(--twake-palette-background-contrast);
+}
+
+li + li {
+  margin-top: 8px;
+}
+
+.secondary {
+  color: var(--twake-palette-text-secondary);
+}
+
+.alert {
+  gap: 12px;
+  border-radius: var(--twake-shape-borderRadius);
+  background: color-mix(in srgb, var(--twake-palette-error-main) var(--tint), transparent);
+  font-weight: 500;
+}
+
+.alert svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 3px;
+  fill: var(--twake-palette-error-main);
+}
+
+a {
+  color: var(--twake-palette-primary-main);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--twake-palette-primary-dark);
+  text-decoration: underline;
+}
+
+form {
+  border-top: 1px solid var(--twake-palette-divider);
+}
+
+label {
+  color: var(--twake-palette-text-secondary);
+  font-weight: 500;
+}
+
+input[type="text"] {
+  min-height: 56px;
+  padding: 16px;
+  border: 1px solid var(--twake-palette-border-main);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--twake-palette-text-primary);
+  font: inherit;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  transition: border-color 150ms;
+}
+
+input[type="text"]:hover {
+  border-color: var(--twake-palette-text-disabled);
+}
+
+input[type="text"]:focus {
+  border-color: var(--twake-palette-primary-main);
+  outline: none;
+}
+
+.actions {
+  gap: 8px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 24px;
+  border: 0;
+  border-radius: 100px;
+  background: var(--twake-palette-primary-main);
+  color: var(--twake-palette-primary-contrastText);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  cursor: pointer;
+  transition: background-color 250ms;
+}
+
+.button:hover {
+  background: var(--twake-palette-primary-dark);
+  color: var(--twake-palette-primary-contrastText);
+  text-decoration: none;
+}
+
+.button-outlined,
+.button-danger {
+  padding: 5px 15px;
+}
+
+.button-outlined {
+  border: 1px solid currentColor;
+  background: transparent;
+  color: var(--twake-palette-primary-main);
+}
+
+.button-outlined:hover {
+  background: color-mix(
+    in srgb,
+    var(--twake-palette-primary-main) calc(var(--twake-palette-action-hoverOpacity) * 100%),
+    transparent
+  );
+}
+
+.button-danger {
+  background: color-mix(in srgb, var(--twake-palette-error-main) 8%, transparent);
+  color: var(--twake-palette-error-main);
+}
+
+.button-danger:hover {
+  background: color-mix(in srgb, var(--twake-palette-error-main) 16%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

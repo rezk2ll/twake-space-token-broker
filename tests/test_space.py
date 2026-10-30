@@ -165,7 +165,7 @@ async def test_the_agent_of_an_owner_who_pasted_a_space_token_gets_it_with_lemon
     pasted = await paste(client, step, token)
 
     assert pasted.status_code == 200
-    assert "<title>Votre assistant est autorisé</title>" in pasted.text
+    assert "<title>Votre assistant est autorisé - Twake Space</title>" in pasted.text
     assert (
         f"{PASTED} Ce jeton permet : « Lire les espaces », « Lire les fils », « Gérer les"
         " membres », « Modifier les espaces »."
@@ -224,7 +224,7 @@ async def test_an_owner_who_skipped_the_space_step_gets_the_consent_link_for_spa
     skipped = await skip(client, step)
 
     assert skipped.status_code == 200
-    assert "<title>Votre assistant est autorisé</title>" in skipped.text
+    assert "<title>Votre assistant est autorisé - Twake Space</title>" in skipped.text
     assert SKIPPED in text_of(skipped)
     # Their agent acts for them everywhere but in Twake Space
     assert (await client.get("/forward-auth", headers=as_agent_of(MMAUDET))).status_code == 200
@@ -595,7 +595,7 @@ async def test_the_space_step_follows_the_drive_step(
     ) in text_of(step)
     pasted = await paste(client, step, space.create_token(*EVERY_SCOPE))
     assert pasted.status_code == 200
-    assert "<title>Votre assistant est autorisé</title>" in pasted.text
+    assert "<title>Votre assistant est autorisé - Twake Space</title>" in pasted.text
     assert "y compris dans Drive" in text_of(pasted)
     drive_route = await client.get(
         "/forward-auth", params={"token": "drive"}, headers=as_agent_of(MMAUDET)
@@ -647,7 +647,9 @@ async def test_the_space_step_follows_a_drive_step_that_failed_with_its_status(
     assert 'action="/consent/space"' in step.text
     pasted = await paste(client, step, space.create_token(*EVERY_SCOPE))
     assert pasted.status_code == 200
-    assert "<title>Votre assistant est autorisé, sauf dans Drive</title>" in pasted.text
+    assert "<title>Votre assistant est autorisé, sauf dans Drive - Twake Space</title>" in (
+        pasted.text
+    )
     assert f"{reason} {PASTED}" in text_of(pasted)
     assert 'href="/consent"' in pasted.text
 
@@ -704,7 +706,7 @@ async def test_the_consent_link_for_space_goes_straight_to_the_space_step_and_ke
     assert DRIVE_UNCHANGED in text_of(step)
     pasted = await paste(client, step, token)
     assert pasted.status_code == 200
-    assert "<title>Votre assistant est autorisé</title>" in pasted.text
+    assert "<title>Votre assistant est autorisé - Twake Space</title>" in pasted.text
     assert f"{DRIVE_UNCHANGED} {PASTED}" in text_of(pasted)
     assert (await space_route(client, MMAUDET)).headers["x-twake-space-token"] == token
     drive_route = await client.get(
@@ -719,7 +721,7 @@ async def test_the_consent_link_for_space_signed_in_as_someone_else_stores_nothi
     refused = await space_link(client, lemonldap, MMAUDET, signed_in_as=ALICE)
 
     assert refused.status_code == 403
-    assert "<title>Ce lien est pour un autre compte</title>" in refused.text
+    assert "<title>Ce lien est pour un autre compte - Twake Space</title>" in refused.text
     # Starting over keeps to the link for Space
     assert 'href="/consent?owner=mmaudet%40example.test&app=space"' in text_of(refused)
     for user in (MMAUDET, ALICE):
@@ -810,7 +812,7 @@ async def test_removing_the_space_token_closes_twake_space_alone_to_the_agent(
     removed = await remove(client, await space_link(client, lemonldap, MMAUDET))
 
     assert removed.status_code == 200
-    assert "<title>Votre assistant est autorisé</title>" in removed.text
+    assert "<title>Votre assistant est autorisé - Twake Space</title>" in removed.text
     assert f"{DRIVE_UNCHANGED} {REMOVED}" in text_of(removed)
     assert (await space_route(client, MMAUDET)).json() == SPACE_TOKEN_MISSING
     assert (await client.get("/forward-auth", headers=as_agent_of(MMAUDET))).status_code == 200
@@ -934,7 +936,7 @@ async def test_without_twake_space_the_consent_has_no_space_step(
         )
 
     assert authorized.status_code == 200
-    assert "<title>Votre assistant est autorisé</title>" in authorized.text
+    assert "<title>Votre assistant est autorisé - Twake Space</title>" in authorized.text
     assert "/consent/space" not in authorized.text
     assert posted.status_code == 404
     assert space.requests == []

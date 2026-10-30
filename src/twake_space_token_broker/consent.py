@@ -14,6 +14,7 @@ from collections.abc import Callable, Collection
 from datetime import UTC, datetime
 from enum import StrEnum
 from html import escape
+from importlib.resources import files
 from typing import Annotated, Any
 from urllib.parse import parse_qs
 
@@ -146,31 +147,85 @@ WITHOUT_DRIVE = {
 """Why a consent ends without Drive, and the status of its page."""
 
 
+def _asset(name: str) -> str:
+    return (files("twake_space_token_broker") / "page" / name).read_text()
+
+
+class Tone(StrEnum):
+    """How a page ends the consent, shown by the icon above its title."""
+
+    SUCCESS = "success"
+    WARNING = "warning"
+    ERROR = "error"
+
+
+STYLE = _asset("twake-css-vars.css") + _asset("twake-css-utils.css") + _asset("consent.css")
+"""The variables and utility classes of @linagora/twake-css, which npm ci copies next to the page,
+then the looks of the components twake-mui would give."""
+
+BRAND = _asset("twake-workplace.svg") + _asset("twake-text.svg")
+
+ICONS = {
+    Tone.SUCCESS: _asset("check-circle.svg"),
+    Tone.WARNING: _asset("warning.svg"),
+    Tone.ERROR: _asset("warning-circle.svg"),
+}
+
+
 def _page(
     title: str,
     *paragraphs: str,
+    tone: Tone | None = None,
+    problem: str | None = None,
     retry_url: str | None = None,
     status_code: int = 200,
     more: str = "",
 ) -> HTMLResponse:
-    """A short page in French.
+    """A short page in French, in the look of Twake.
 
-    Its title and paragraphs are text, which the page escapes; more is HTML that follows them, such
-    as a form. With a retry URL, a link lets the user start the consent over.
+    Its title, problem and paragraphs are text, which the page escapes; more is HTML that follows
+    them, such as a form. A problem stands out above the paragraphs. With a retry URL, a button
+    lets the user start the consent over. A page whose more holds the steps of the Space token
+    shows them in a column of their own on wide screens.
     """
-    text = "".join(f"\n<p>{escape(paragraph)}</p>" for paragraph in paragraphs)
-    link = f'\n<p><a href="{escape(retry_url)}">Recommencer</a></p>' if retry_url else ""
+    status = (
+        f'\n<div class="status status-{tone} u-flex u-flex-items-center u-flex-justify-center'
+        f' u-bdrs-circle u-mb-1" aria-hidden="true">{ICONS[tone]}</div>'
+        if tone
+        else ""
+    )
+    alert = (
+        f'\n<p class="alert u-flex u-p-1 u-mt-0 u-mb-1 u-fz-small" role="alert">'
+        f"{ICONS[Tone.ERROR]}<span>{escape(problem)}</span></p>"
+        if problem
+        else ""
+    )
+    text = "".join(
+        f'\n<p class="u-mt-0 u-mb-1">{escape(paragraph)}</p>' for paragraph in paragraphs
+    )
+    link = (
+        f'\n<p class="u-flex u-mt-1-half u-mb-0"><a class="button" href="{escape(retry_url)}">'
+        "Recommencer</a></p>"
+        if retry_url
+        else ""
+    )
+    width = "page page-wide" if 'class="how' in more else "page"
     return HTMLResponse(
         f"""<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{escape(title)}</title>
+<title>{escape(title)} - Twake Space</title>
+<style>
+{STYLE}</style>
 </head>
-<body>
-<main>
-<h1>{escape(title)}</h1>{text}{more}{link}
+<body class="u-m-0 u-pv-1-half u-ph-1">
+<header class="{width} u-flex u-flex-items-center u-mh-auto u-mb-1">
+<div class="brand u-flex u-flex-items-center" role="img" aria-label="Twake">{BRAND}</div>
+</header>
+<main class="{width} u-mh-auto u-p-2 u-p-1-half-s u-elevation-1">{status}
+<h1 class="u-mt-0 u-mb-1">{escape(title)}</h1>{alert}{text}{more}{link}
 </main>
 </body>
 </html>
@@ -181,14 +236,22 @@ def _page(
 
 def _refused(reason: str, *, retry_url: str, status_code: int = 400) -> HTMLResponse:
     response = _page(
-        "L'autorisation n'a pas abouti", reason, retry_url=retry_url, status_code=status_code
+        "L'autorisation n'a pas abouti",
+        reason,
+        tone=Tone.ERROR,
+        retry_url=retry_url,
+        status_code=status_code,
     )
     response.delete_cookie(COOKIE)
     return response
 
 
 def _authorized(message: str) -> HTMLResponse:
-    response = _page("Votre assistant est autorisé", f"{message} Vous pouvez fermer cette page.")
+    response = _page(
+        "Votre assistant est autorisé",
+        f"{message} Vous pouvez fermer cette page.",
+        tone=Tone.SUCCESS,
+    )
     response.delete_cookie(COOKIE)
     return response
 
@@ -198,6 +261,7 @@ def _without_drive(message: str, *, retry_url: str, status_code: int) -> HTMLRes
     response = _page(
         "Votre assistant est autorisé, sauf dans Drive",
         message,
+        tone=Tone.WARNING,
         retry_url=retry_url,
         status_code=status_code,
     )
@@ -212,6 +276,7 @@ def _wrong_account(owner: str, signed_in: str, *, retry_url: str) -> HTMLRespons
         f"Ce lien autorise l'assistant de {owner}, mais ce navigateur est connecté à Twake en"
         f" tant que {signed_in} : rien n'a été enregistré. Ouvrez ce lien dans une fenêtre de"
         f" navigation privée, puis connectez-vous en tant que {owner}.",
+        tone=Tone.ERROR,
         retry_url=retry_url,
         status_code=403,
     )
@@ -294,8 +359,9 @@ def _space_step(
             "Pour qu'il lise vos espaces Twake Space et leurs fils, et qu'il en gère les membres,"
             " créez-lui un jeton d'API dans Twake Space, puis collez-le ici."
         ]
-        buttons = """<button type="submit">Enregistrer le jeton</button>
-<button type="submit" name="skip" value="yes" formnovalidate>Passer cette étape</button>"""
+        buttons = """<button class="button" type="submit">Enregistrer le jeton</button>
+<button class="button button-outlined" type="submit" name="skip" value="yes"
+formnovalidate>Passer cette étape</button>"""
     else:
         paragraphs = [
             f"Un jeton est déjà enregistré, collé le {_day(kept.pasted_at)}."
@@ -303,27 +369,31 @@ def _space_step(
             "Gardez-le, retirez-le, ou remplacez-le : créez un autre jeton d'API dans Twake Space,"
             " puis collez-le ici.",
         ]
-        buttons = """<button type="submit">Remplacer le jeton</button>
-<button type="submit" name="skip" value="yes" formnovalidate>Garder ce jeton</button>
-<button type="submit" name="remove" value="yes" formnovalidate>Retirer ce jeton</button>"""
+        buttons = """<button class="button" type="submit">Remplacer le jeton</button>
+<button class="button button-outlined" type="submit" name="skip" value="yes"
+formnovalidate>Garder ce jeton</button>
+<button class="button button-danger u-ml-auto u-ml-0-s" type="submit" name="remove" value="yes"
+formnovalidate>Retirer ce jeton</button>"""
     return _page(
         "Votre assistant dans vos espaces",
-        *([problem] if problem else []),
         _authorized_for(user, drive),
         *paragraphs,
+        problem=problem,
         more=f"""
-<ol>
+<div class="how">
+<ol class="steps u-mt-0 u-mb-1 u-p-1 u-pl-2-half u-bdrs-4">
 <li>Ouvrez la page <a href="{escape(tokens_page)}">Jetons d'API</a> de Twake Space, puis cliquez sur
 « Créer un jeton ».</li>{steps}
 </ol>
-<p>{escape(SPACE_SCOPES_NEEDED)}</p>
-<form method="post" action="{SPACE_FORM}">
+<p class="secondary u-mt-0 u-mb-1 u-fz-small">{escape(SPACE_SCOPES_NEEDED)}</p>
+<form class="u-mt-1 u-pt-1" method="post" action="{SPACE_FORM}">
 <input type="hidden" name="state" value="{escape(state)}">
-<p><label for="space_token">Jeton</label>
-<input id="space_token" name="space_token" type="text" autocomplete="off" spellcheck="false"
-required></p>
-<p>{buttons}</p>
-</form>""",
+<p class="u-m-0"><label class="u-db u-mb-half u-fz-small" for="space_token">Jeton</label>
+<input class="u-w-100" id="space_token" name="space_token" type="text" autocomplete="off"
+spellcheck="false" required></p>
+<div class="actions u-flex u-flex-wrap u-flex-column-s u-mt-1">{buttons}</div>
+</form>
+</div>""",
         status_code=status_code,
     )
 
