@@ -161,7 +161,10 @@ To deploy it:
 
 The tests call the HTTP API against a real PostgreSQL that they start with Docker, a fake LemonLDAP, a fake cozy-stack and a fake Twake Space API.
 
+The pages take their look from `@linagora/twake-css`: `npm ci` installs it and copies its variables and utility classes next to the pages, before the broker runs or the tests start.
+
 ```sh
+npm ci
 uv run pytest
 uv run mypy
 uv run ruff check . && uv run ruff format --check .

@@ -1,0 +1,11 @@
+{
+  "name": "twake-space-token-broker-pages",
+  "private": true,
+  "description": "The design system of the consent pages, which the broker inlines from page/twake-css-*.css",
+  "scripts": {
+    "postinstall": "cp node_modules/@linagora/twake-css/dist/vars.css src/twake_space_token_broker/page/twake-css-vars.css && cp node_modules/@linagora/twake-css/dist/utils.css src/twake_space_token_broker/page/twake-css-utils.css"
+  },
+  "dependencies": {
+    "@linagora/twake-css": "1.2.0"
+  }
+}

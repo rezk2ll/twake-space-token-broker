@@ -3,3 +3,5 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
+node_modules/
+src/twake_space_token_broker/page/twake-css-*.css
